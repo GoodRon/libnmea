@@ -1,0 +1,6 @@
+[submodule "libtokens"]
+	path = libtokens
+	url = git@github.com:GoodRon/libtokens.git
+[submodule "CMake"]
+	path = CMake
+	url = git@github.com:GoodRon/CMake.git
