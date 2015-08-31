@@ -346,7 +346,7 @@ vector<string> split(const string& data) {
 	static string residue;
 	vector<string> splittedStrings;
 
-	size_t start = 0, end;
+	size_t start = 0, end = 0;
 	while (start < data.length()) {
 		// TODO find '\n'
 		end = data.find_first_of('\r', start);

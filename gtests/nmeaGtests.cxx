@@ -8,12 +8,16 @@
 #include <gtest/gtest.h>
 
 #include "nmea.h"
+#include "tokens.h"
 #include "gps.h"
 
 using namespace std;
 using namespace nmea;
 
 const string nmeaRmc = "$GPRMC,091724.00,A,5630.7930,N,08459.3424,E,06.404,075.5,260214,,,A*69";
+const string nmeaGgaGsaGsa = "$GPGGA,091724.00,5630.7930,N,08459.3424,E,1,13,0.7,117.1,M,,M,,*74\r\n"
+        "$GPGSA,A,3,32,23,25,20,31,14,04,,,,,,1.3,0.7,1.0*30\r\n"
+        "$GPGSA,A,3,65,75,66,72,74,76,,,,,,,1.3,0.7,1.0*30\r\n";
 
 TEST(libnmea_tests, nmphToKph) {
     ASSERT_EQ(nmphToKph(1), 1.852);
@@ -25,15 +29,17 @@ TEST(libnmea_tests, crc) {
 }
 
 TEST(libnmea_tests, split) {
-    vector<string> parts = {"$GPRMC", "091724.00", "A", "5630.7930", "N", "08459.3424",
-                            "E", "06.404", "075.5", "260214", "", "", "A*69"};
-    auto tokens = split(nmeaRmc);
+    vector<string> parts = {"$GPGGA,091724.00,5630.7930,N,08459.3424,E,1,13,0.7,117.1,M,,M,,*74\r\n",
+                            "$GPGSA,A,3,32,23,25,20,31,14,04,,,,,,1.3,0.7,1.0*30\r\n",
+                            "$GPGSA,A,3,65,75,66,72,74,76,,,,,,,1.3,0.7,1.0*30\r\n"};
+    auto tokens = split(nmeaGgaGsaGsa);
+    ASSERT_EQ(tokens.size(), 3);
     for (size_t i = 0; i < tokens.size(); ++i) {
         ASSERT_TRUE(i < parts.size());
         if (i >= parts.size()) {
             break;
         }
-        ASSERT_EQ(tokens[i], parts[i]);
+        ASSERT_TRUE(rtrimCopy(tokens[i]) == rtrimCopy(parts[i]));
     }
 }
 
