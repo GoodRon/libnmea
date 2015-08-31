@@ -15,8 +15,8 @@ using namespace nmea;
 
 const string nmeaRmc = "$GPRMC,091724.00,A,5630.7930,N,08459.3424,E,06.404,075.5,260214,,,A*69";
 
-TEST(libnmea_tests, mphToKph) {
-    ASSERT_EQ(mphToKph(1), 1.852);
+TEST(libnmea_tests, nmphToKph) {
+    ASSERT_EQ(nmphToKph(1), 1.852);
 }
 
 TEST(libnmea_tests, crc) {
@@ -45,7 +45,7 @@ TEST(libnmea_tests, parceRmc) {
     gpsData.longitude = 8459.3424;
     gpsData.eastLongitude = true;
     gpsData.altitude = 0;
-    gpsData.speed = mphToKph(6.404);
+    gpsData.speed = nmphToKph(6.404);
     gpsData.direction = 75.5;
     gpsData.hdop = 99.0;
     gpsData.vdop = 99.0;

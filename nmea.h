@@ -57,12 +57,12 @@ enum NmeaType {
 };
 
 /**
- * @brief Перевод скорости из милей/час в километры/час
+ * @brief Перевод скорости из морских милей/час в километры/час
  *
- * @param speed скорость миль/час
+ * @param speed скорость морских миль/час
  * @return double скорость км/час
  */
-double mphToKph(double speed);
+double nmphToKph(double speed);
 
 /**
  * @brief Расчет CRC для NMEA строки (XOR-сумма всех байт в строке между «$» и «*»)

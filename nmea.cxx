@@ -39,7 +39,7 @@ uint8_t calculateCrc(const string& str) {
 	return crc;
 }
 
-double mphToKph(double speed) {
+double nmphToKph(double speed) {
 	return speed * kilometersInNauticalMile;
 }
 
@@ -104,7 +104,7 @@ static bool rmc(const string& str, GpsData& gpsData) {
 	stream.str(tokens[7]);
     stream.seekg(0);
     stream >> gpsData.speed;
-    gpsData.speed = mphToKph(gpsData.speed);
+    gpsData.speed = nmphToKph(gpsData.speed);
 
 	// Путевой угол
 	stream.str(tokens[8]);
@@ -306,7 +306,7 @@ static bool vtg(const string& str, GpsData& gpsData) {
 	stream.str(tokens[7]);
 	stream.seekg(0);
 	stream >> gpsData.speed;
-    gpsData.speed = mphToKph(gpsData.speed);
+    gpsData.speed = nmphToKph(gpsData.speed);
 	return true;
 }
 
