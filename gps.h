@@ -9,8 +9,7 @@
 #include <cmath>
 #include <ctime>
 
-#define RADIAN (M_PI / 180.0)
-#define NAUTICAL_MILE 1852
+const double metersInNauticalMile = 1852.0;
 
 /**
  * @brief Структура навигационных данных
